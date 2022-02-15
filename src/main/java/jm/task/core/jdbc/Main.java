@@ -1,5 +1,7 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
@@ -11,6 +13,19 @@ public class Main {
 //      4  Очистка таблицы User(ов)
 //      5  Удаление таблицы
 
+        UserDaoJDBCImpl userDaoJDBC  = new UserDaoJDBCImpl();
+//        userDaoJDBC.createUsersTable();
+//
+//        userDaoJDBC.saveUser("Radel","Nigma", (byte) 42);
+//        userDaoJDBC.saveUser("Kim","Dandy", (byte) 25);
+//        userDaoJDBC.saveUser("Oksana","Fedorova", (byte) 35);
+//        userDaoJDBC.saveUser("Poul","Maccartny", (byte) 78);
 
+
+//        userDaoJDBC.getAllUsers();
+//        userDaoJDBC.removeUserById(2);
+//        userDaoJDBC.getAllUsers();
+//        userDaoJDBC.cleanUsersTable();
+        userDaoJDBC.dropUsersTable();
     }
 }
