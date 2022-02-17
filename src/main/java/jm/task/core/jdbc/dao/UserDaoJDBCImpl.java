@@ -2,6 +2,8 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,17 +15,29 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() {
-        try (Statement statement = Util.getConnection().createStatement()) {
-            String SQL = "CREATE TABLE IF NOT EXISTS Users(" +
-                    "id int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-                    "name varchar(50)," +
-                    " lastName varchar(50)," +
-                    " age int)";
+        String SQL = "CREATE TABLE IF NOT EXISTS Users(" +
+                "id int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+                "name varchar(50)," +
+                " lastName varchar(50)," +
+                " age int)";
+        try (PreparedStatement statement = Util.getConnection().prepareStatement(SQL)) {
             statement.executeUpdate(SQL);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+//    public void createUsersTable() {
+//        try (Statement statement = Util.getConnection().createStatement()) {
+//            String SQL = "CREATE TABLE IF NOT EXISTS Users(" +
+//                    "id int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+//                    "name varchar(50)," +
+//                    " lastName varchar(50)," +
+//                    " age int)";
+//            statement.executeUpdate(SQL);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void dropUsersTable() {
         try (Statement statement = Util.getConnection().createStatement()) {
@@ -34,10 +48,21 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+//    public void saveUser(String name, String lastName, byte age) {
+//        try (Statement statement = Util.getConnection().createStatement()) {
+//            String SQL = "INSERT INTO Users VALUES(" + null + ",'" + name + "','"
+//                    + lastName + "'," + age + ")";
+//            statement.executeUpdate(SQL);
+//            System.out.println("User с именем – " + name + " добавлен в базу данных");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public void saveUser(String name, String lastName, byte age) {
-        try (Statement statement = Util.getConnection().createStatement()) {
-            String SQL = "INSERT INTO Users VALUES(" + null + ",'" + name + "','"
-                    + lastName + "'," + age + ")";
+        String SQL = "INSERT INTO Users VALUES(" + null + ",'" + name + "','"
+                + lastName + "'," + age + ")";
+        try (PreparedStatement statement = Util.getConnection().prepareStatement(SQL)) {
             statement.executeUpdate(SQL);
             System.out.println("User с именем – " + name + " добавлен в базу данных");
         } catch (SQLException e) {
