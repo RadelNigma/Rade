@@ -21,7 +21,7 @@ public class Util {
     private static final String PASSWORD = "FFpe43FFpe43";
 
     private static SessionFactory sessionFactory;
-    private static final SessionFactory concreteSessionFactory;
+    //private static final SessionFactory concreteSessionFactory;
 
     private static Connection connection;
 
@@ -42,7 +42,6 @@ public class Util {
             try {
                 Configuration configuration = new Configuration();
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
                 settings.put(Environment.URL, URL);
@@ -54,7 +53,7 @@ public class Util {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+               //settings.put(Environment.HBM2DDL_AUTO, "none");
 
                 configuration.setProperties(settings);
 
@@ -72,40 +71,40 @@ public class Util {
     }
 
 
-    static {
-        try {
-            Properties prop = new Properties();
-            prop.setProperty(Environment.URL,URL);
-            prop.setProperty(Environment.USER,USERNAME);
-            prop.setProperty(Environment.PASS, PASSWORD);
-            prop.setProperty(Environment.DRIVER,"com.mysql.cj.jdbc.Driver");
-            prop.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-            prop.setProperty(Environment.SHOW_SQL, "true");
-            prop.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-            prop.setProperty(Environment.HBM2DDL_AUTO, "create-drop");
-            prop.setProperty(Environment.SHOW_SQL, "true");
-
-//            prop.setProperty("hibernate.connection.url", URL);
-//            prop.setProperty("hibernate.connection.username", USERNAME);
-//            prop.setProperty("hibernate.connection.password", PASSWORD);
-//            prop.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
-
-          //  prop.setProperty("hibernate.hbm2ddl.auto", "create");
-
-            concreteSessionFactory = new Configuration()
-                    .addProperties(prop)
-                    //.addPackage("com.kat")
-                    .addAnnotatedClass(User.class)
-                    .buildSessionFactory()
-            ;
-        }
-        catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    public static Session getSession() throws HibernateException {
-        return concreteSessionFactory.openSession();
-    }
+//    static {
+//        try {
+//            Properties prop = new Properties();
+//            prop.setProperty(Environment.URL,URL);
+//            prop.setProperty(Environment.USER,USERNAME);
+//            prop.setProperty(Environment.PASS, PASSWORD);
+//            prop.setProperty(Environment.DRIVER,"com.mysql.cj.jdbc.Driver");
+//            prop.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+//            prop.setProperty(Environment.SHOW_SQL, "true");
+//            prop.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+//            prop.setProperty(Environment.HBM2DDL_AUTO, "create-drop");
+//            prop.setProperty(Environment.SHOW_SQL, "true");
+//
+////            prop.setProperty("hibernate.connection.url", URL);
+////            prop.setProperty("hibernate.connection.username", USERNAME);
+////            prop.setProperty("hibernate.connection.password", PASSWORD);
+////            prop.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+//
+//          //  prop.setProperty("hibernate.hbm2ddl.auto", "create");
+//
+//            concreteSessionFactory = new Configuration()
+//                    .addProperties(prop)
+//                    //.addPackage("com.kat")
+//                    .addAnnotatedClass(User.class)
+//                    .buildSessionFactory()
+//            ;
+//        }
+//        catch (Exception ex) {
+//            throw new ExceptionInInitializerError(ex);
+//        }
+//    }
+//    public static Session getSession() throws HibernateException {
+//        return concreteSessionFactory.openSession();
+//    }
 
 
 }
