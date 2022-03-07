@@ -9,13 +9,12 @@ import jm.task.core.jdbc.util.Util;
 
 import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
-
 public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
 
     }
 
-    private void getSession(String sql) {
+    private void sqlQueryExecute(String sql) {
         Transaction transaction = null;
         try (Session session = getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -30,7 +29,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        getSession("CREATE TABLE IF NOT EXISTS Users(" +
+        sqlQueryExecute("CREATE TABLE IF NOT EXISTS Users(" +
                 "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
                 "name varchar(50)," +
                 "lastName varchar(50)," +
@@ -39,7 +38,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-        getSession("DROP TABLE IF EXISTS users");
+        sqlQueryExecute("DROP TABLE IF EXISTS users");
     }
 
     @Override
@@ -86,6 +85,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-        getSession("delete from Users");
+        sqlQueryExecute("delete from Users");
     }
 }

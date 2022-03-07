@@ -34,6 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void saveUser(String name, String lastName, byte age) {
